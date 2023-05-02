@@ -1,10 +1,8 @@
 import inquirer from "inquirer"
-import { type } from "os"
 import chalk from "chalk"
 import chalkAnimation from "chalk-animation"
 import figlet from "figlet"
-import { log } from "console"
-import { CLIENT_RENEG_LIMIT } from "tls"
+
 
 const rainbowsleep = () =>
     new Promise((resolve) => {
@@ -25,22 +23,22 @@ startup.stop()
 const Guess = async () => {
     const ques = (await inquirer.prompt([
         {
-            name: "input1",
+            name: "input",
             type: 'number',
-            message: "Guess the Number",
+            message: "Guess The Number :",
         }
     ]));
 
-    const { input1 } = ques;
+    const { input } = ques;
 
-    if (input1 === 5) {
+    if (input === 5) {
         console.log(chalk.blue(figlet.textSync("Wow")), chalk.cyan(`...... Congrats you guess the Right Number.`))
     }
-    else if (input1 === 1 || input1 === 2 || input1 === 3 || input1 === 4) {
-        console.log(chalk.red(`Ooops.... Your's Guess Number Not Match.. Number is grater then ${chalk.yellow(input1)} `))
+    else if (input === 1 || input === 2 || input === 3 || input === 4) {
+        console.log(chalk.red(`Ooops.... Your's Guess Number Not Match.. Number is grater then ${chalk.yellow(input)} `))
     }
-    else if (input1 === 6 || input1 === 7 || input1 === 8 || input1 === 9) {
-        console.log(chalk.red(`Ooops.... Your's Guess Number Not Match.. Number is lesser then ${chalk.yellow(input1)} `))
+    else if (input === 6 || input === 7 || input === 8 || input === 9) {
+        console.log(chalk.red(`Ooops.... Your's Guess Number Not Match.. Number is lesser then ${chalk.yellow(input)} `))
     }
 
     else {
@@ -48,7 +46,7 @@ const Guess = async () => {
     }
 }
 
-for (let i = 1; i <= 4; i++) {
+for (let i = 1; i < 4; i++) {
 
     await Guess();
 
@@ -65,7 +63,7 @@ do {
     })
 
     if (restart.again === 'Y' || restart.again === 'y' || restart.again === 'Yes' || restart.again === 'yes') {
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i < 4; i++) {
 
             await Guess();
         }
