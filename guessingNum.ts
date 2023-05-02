@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 import inquirer from "inquirer"
 import { type } from "os"
 import chalk from "chalk"
@@ -7,21 +6,22 @@ import figlet from "figlet"
 import { log } from "console"
 import { CLIENT_RENEG_LIMIT } from "tls"
 
-const freeze = () =>
+const rainbowsleep = () =>
     new Promise((resolve) => {
         return setTimeout(resolve, 1000)
     })
-const freeze2 = () =>
+const rainbowsleep2 = () =>
     new Promise((resolve) => {
         return setTimeout(resolve, 2500)
     })
 
 let wellcome = chalkAnimation.rainbow(figlet.textSync("Well Come") + ("(Guessing Game!!!)"))
-await freeze();
+await rainbowsleep();
 wellcome.stop();
-let startup = chalkAnimation.karaoke(`You have 3 Rounds.Let's start....`)
-await freeze2();
+let startup = chalkAnimation.karaoke(`You have 4 Rounds.Let's start....`)
+await rainbowsleep2();
 startup.stop()
+
 const Guess = async () => {
     const ques = (await inquirer.prompt([
         {
@@ -33,49 +33,43 @@ const Guess = async () => {
 
     const { input1 } = ques;
 
-    if (input1 === 3) {
-        console.log(chalk.blue(figlet.textSync("Wow")), chalk.cyan(`...... Congrats you guess the Right Number in ${1}st time.`))
+    if (input1 === 5) {
+        console.log(chalk.blue(figlet.textSync("Wow")), chalk.cyan(`...... Congrats you guess the Right Number.`))
     }
-    else console.log(chalk.red("Ooops.... Your's Guess Number Not Match.. "))
-
-    let round2 = await inquirer.prompt(
-        {
-            name: "input01",
-            type: 'number',
-            message: "Round 2: Guess the Number",
-
-        })
-    const input01 = round2;
-    if (round2.input01 === 3) {
-        console.log(chalk.blue(figlet.textSync("Wow")), chalk.cyan(`...... Congrats you guess the Right Number in ${2}nd time.`))
+    else if (input1 === 1 || input1 === 2 || input1 === 3 || input1 === 4) {
+        console.log(chalk.red(`Ooops.... Your's Guess Number Not Match.. Number is grater then ${chalk.yellow(input1)} `))
     }
-    else { console.log(chalk.red("Ooops....Your's Guess Number Not Match.. ")) }
-
-    let round3 = await inquirer.prompt(
-        {
-            name: "input001",
-            type: 'number',
-            message: "Round 3: Guess the Number",
-
-        })
-    const input001 = round3;
-    if (round3.input001 === 3) {
-        console.log(chalk.blue(figlet.textSync("Wow")), chalk.cyan(`...... Congrats you guess the Right Number in ${3}rd time.`))
+    else if (input1 === 6 || input1 === 7 || input1 === 8 || input1 === 9) {
+        console.log(chalk.red(`Ooops.... Your's Guess Number Not Match.. Number is lesser then ${chalk.yellow(input1)} `))
     }
-    else { console.log(chalk.red("Ooops....Again Your's Guess Number Not Match.. ")) }
 
+    else {
+        console.log("PLz enter Numarical Value B/w 0-9");
+    }
 }
 
-const startagain = async () => {
-    do {
-        await Guess();
-        var restart = await inquirer.prompt({
-            type: 'input',
-            name: 'again',
-            message: `Did you want to Play again press y otherwise n: ( y/n )`
-        })
+for (let i = 1; i <= 4; i++) {
 
-    } while (restart.again === 'y' || restart.again === 'Y' || restart.again === 'yes' || restart.again === 'YES' || restart.again === 'yea')
+    await Guess();
+
 }
+do {
+    await Guess();
 
-startagain()
+    var restart = await inquirer.prompt({
+        type: 'input',
+        name: 'again',
+        message: chalk.magentaBright('Did you want to Play again press y otherwise n:') + '( y/n )',
+        default: 'y'
+
+    })
+
+    if (restart.again === 'Y' || restart.again === 'y' || restart.again === 'Yes' || restart.again === 'yes') {
+        for (let i = 1; i <= 4; i++) {
+
+            await Guess();
+        }
+    }
+    else { }
+
+} while (restart.again === 'Y' || restart.again === 'y' || restart.again === 'Yes' || restart.again === 'yes');
