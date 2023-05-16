@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "bin": {
-    "dani-guessgame": "bin/guessingNum.js"
-  },
+ 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
