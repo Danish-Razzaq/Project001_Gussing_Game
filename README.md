@@ -1,6 +1,6 @@
 # Number Guessing Game
 
-A simple number guessing game built with JavaScript.
+A simple number guessing game built with TypeScript.
 
 ## Installation
 
